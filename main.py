@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Tue Dec 18 20:23:16 2018
-
-@author: Alan
+TODO HEADER and rest of file
 """
 
-
-
-# Read in json file from facebook
-
-
+# Read in and parse json file from facebook
 
 # Create word cloud
 

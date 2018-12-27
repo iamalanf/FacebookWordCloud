@@ -1,54 +1,61 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 18 20:25:10 2018
+'''
+This file  takes a json file exported from facebook and creates two files:
+ > 'message_content.txt' - containing all message text content, for use in
+   creating a wordcloud
+ > 'messages.csv' - containing all message information in csv format, for
+    use in analysis 
 
-@author: Alan
-"""
+TODO: put below in functions!
+'''
 
+# Load required modules
+# json for reading the json file downloaded from Facebook
 import json
+# pandas for exporting the data to csv (for analysis)
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib
 
+# Open the json file for reading
 with open('message.json', 'r') as f:
     my_dict = json.load(f)
-type(my_dict)
 
+# my_dict is a dictionary. Get all entries corresponding to 
+# the key 'messages' this will be the content for the wordcloud
 a = my_dict.get('messages')
 
+# Open a file which will be used to write the message content to 
 file = open('message_content.txt', 'w', encoding="utf-8")
-a_count = 0
-b_count = 0
 
-#Create new dataframe
+#Create new pandas dataframe
 df = pd.DataFrame()
 
+# Counter for number of message entries
 count = 0
+
 # Go through each entry
 for entry in a:
+    # Get the message content from the inner dictionary
+    # ('sender_name', 'timestamp_ms', 'type', 'photos' etc fields also exist)
     message = entry.get('content')
+    
+    # Write the content to output file (have put spaces either side to ensure 
+    # that words do not merge)
     file.write(' %s ' % (message))
+    
+    # Increment the counter
     count = count + 1
     
-    # Convert entry to dataframe
+    # Convert entry to temporary dataframe
     df_temp = pd.DataFrame([entry], columns=entry.keys())
+    # Append the temporary df to the master df
     df = df.append(df_temp, ignore_index = True)
     
-    if(entry.get('sender_name')=='Alan Flinton'):
-        a_count = a_count + 1
-    else:
-        b_count = b_count + 1
-        
+    # Print how may messages have been processed
     print('\rCount %i ' % (count), end='')
-#     if a_count > 3:
-#         break
-print(a_count, b_count)
     
+
+# Close the file    
 file.close()
 
-# Save dataframe
+# Export the  dataframe as csv (csv will be handy for analysis)
 df.to_csv('messages.csv')
-# Make a backup of dataframe
-df_backup = df
+
