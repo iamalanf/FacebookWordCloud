@@ -56,7 +56,7 @@ Data-analysis of messages will also be updloaded in the future.
 
 12. The Python file "parse_facebook_json.py" at the top level of this GitHub repositry have what we need to get the content out of the json files. I will not go into detail on how the Python script works here. Hopefully the comments in the code will suffice! 
 * Assuming that the json file is called "message.json" and exists in the same directory as "parse_facebook_json.py" (alternatively enter the path to the json file within the Python script. 
-* Make sure you have the required Python dependencies. A "requirements.txt" is available at the top level of this repositry to use run : "pip install -r requirements.txt". (I am using Anaconda which has many of the required dependcies already and would suggest!). 
+* Make sure you have the required Python dependencies. A "requirements.txt" is available at the top level of this repositry to use run : "pip install -r requirements.txt". (I am using Anaconda which has many of the required dependcies already and would suggest!). I have gone overkill with the requirements as I created this when doing some analysis and data visualisation.. apologies!
 * Run "parse_facebook_json.py". This may take a while depending upon the size of the file. A count should be printed to console. Two files should be output:
 ** "message_content.txt" - this is the content of all text messages send. It is this that will be used to create to wordcloud. 
 ** "messages.csv" - stores data on all messages. This can be used for data analysis (COMING SOON!) (If you are comfortable with pandas read this in with pd.read_csv and have a play). 
@@ -67,6 +67,7 @@ Data-analysis of messages will also be updloaded in the future.
 13. Finally, we can create the wordcloud! The Python file "create_word_cloud.py" is used for this purpose. This is kept seperate from the "parse_facebook_json.py" at present as this file runs alot quicker. For quickly resizing and crudely running Python a seperate file is how I have worked thus far. (Could put in main function and reference classes/parsing in future). 
 * Run "parse_facebook_json.py" and a "wordcloud.png" file should be created. 
 ** I have tried to get the output image to be suitable for A4 paper output. Feel free to play with the parameters to tweek to your liking. (Please let me know if you find a better way of doing this!).
+* Further work may need doing on removing repeat words surrounded by whitespace and that included when pictures etc are sent. But nonetheless, for a length visualisation this should provide a good insight into conversation history!
 
 ## Bonus Step
 #### Artsy wordcloud
