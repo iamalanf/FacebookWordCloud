@@ -39,7 +39,7 @@ for entry in a:
     
     # Write the content to output file (have put spaces either side to ensure 
     # that words do not merge)
-    file.write(' %s ' % (message))
+    file.write(' %s \n' % (message))
     
     # Increment the counter
     count = count + 1
