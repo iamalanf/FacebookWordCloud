@@ -10,25 +10,30 @@ def main(argv):
 
     inputfile = ""
     outputfile = ""
+    parseJson = True
     try:
-        opts, args = getopt.getopt(argv,"hi:o:",["inputFile=","outputFile="])
+        opts, args = getopt.getopt(argv,"hi:o:w",["inputFile=","outputFile=","wcOnly"])
     except getopt.GetoptError:
         print ('test.py -i <inputfile> -o <outputfile>')
         sys.exit(2)
    
     for opt, arg in opts:
         if opt == "-h":
-            print("test.py -i --inputFile <inputfile> -o --outputFile <outputfile>")
+            print("test.py -i --inputFile <inputfile> -o --outputFile <outputfile> -w --wcOnly (only print out wc do not parse json. Note json file needs to be parsed at some point)")
             sys.exit()
         elif opt in ("-i", "--inputFile"):
             inputfile = arg
         elif opt in ("-o", "--outputFile"):
             outputfile = arg
+        elif opt in ("-w", "--wcOnly"):
+            print("--wcOnly given not parsing json")
+            parseJson = False
 
     # Check files set TODO: check correct type in future
     inputfile, outputfile = __checkFiles(inputfile, outputfile)
 
-    jsonParser.parseFacebookJson(inputfile, outputfile)
+    if(parseJson):
+        jsonParser.parseFacebookJson(inputfile, outputfile)
     wordCloud.createWordCloud(inputfile, outputfile)
 
     __printComplete()
